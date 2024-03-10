@@ -12,7 +12,7 @@
 <body>
         <h2>Register</h2>
         <br/>
-        <form method="get" action="register">
+        <form method="post" action="UserControllerServlet?command=ADD">
           <div class="form-group">
             <label>First Name</label>
             <input

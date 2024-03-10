@@ -81,6 +81,11 @@ public class UserControllerServlet extends HttpServlet {
 	        throw new ServletException(exc);
 	    }
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    doGet(request, response); // Redirect POST requests to doGet method
+	}
 
 	private void deleteUsers(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
@@ -167,5 +172,24 @@ public class UserControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 	}
+	
+	private void loginUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    String email = request.getParameter("email");
+	    String password = request.getParameter("password");
+
+	    User user = userDbUtil.authenticateUser(email, password);
+	    if (user != null) {
+	        request.getSession().setAttribute("LOGGED_IN_USER", user);
+	        response.sendRedirect("home.jsp"); // Redirect to home page
+	    } else {
+	       // Set an error message in the request scope
+	        request.setAttribute("LOGIN_FAILED", "Invalid email/password");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+	        dispatcher.forward(request, response); // Forward to login page
+	    }
+	}
+
+	
+	
 
 }
