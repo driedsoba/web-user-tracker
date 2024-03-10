@@ -34,6 +34,9 @@
           </div>
           <br/>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <% if (request.getAttribute("errorMessage") != null) { %>
+    	  <p style="color:red;"><%= request.getAttribute("errorMessage").toString() %></p>
+		  <% } %>
         </form>
         <label
           >New to Game Tales? <a href="register.jsp"> Register</a></label
