@@ -23,7 +23,7 @@ public class TestServlet extends HttpServlet {
        
 
 	// Define datasource / connection pool for Resource Injection
-	@Resource(name="jdbc/web_student_tracker")
+	@Resource(name="jdbc/web_gameshop")
 	private DataSource dataSource;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

@@ -47,9 +47,10 @@ public class UserDbUtil {
                 String firstName = myRs.getString("first_name");
                 String lastName = myRs.getString("last_name");
                 String email = myRs.getString("email");
+                String password = myRs.getString("password");
 
                 // Create new user object and add it to the list
-                User tempUser = new User(id, firstName, lastName, email);
+                User tempUser = new User(id, firstName, lastName, email, password);
                 users.add(tempUser);
             }
 
@@ -61,7 +62,6 @@ public class UserDbUtil {
     }
 
     public void addUser(User theUser) throws SQLException {
-
         Connection myConn = null;
         PreparedStatement myStmt = null;
 
@@ -70,7 +70,7 @@ public class UserDbUtil {
             myConn = dataSource.getConnection();
 
             // SQL statement for insert
-            String sql = "INSERT INTO user (first_name, last_name, email) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
 
             myStmt = myConn.prepareStatement(sql);
 
@@ -78,6 +78,7 @@ public class UserDbUtil {
             myStmt.setString(1, theUser.getFirstName());
             myStmt.setString(2, theUser.getLastName());
             myStmt.setString(3, theUser.getEmail());
+            myStmt.setString(4, theUser.getPassword());  
 
             // Execute SQL insert
             myStmt.execute();
@@ -136,9 +137,10 @@ public class UserDbUtil {
         		String firstName = myRs.getString("first_name");
                 String lastName = myRs.getString("last_name");
                 String email = myRs.getString("email");
+                String password = myRs.getString("password");
         		
                 // use the userId during construction
-                theUser = new User (userId, firstName, lastName, email);
+                theUser = new User (userId, firstName, lastName, email, password);
         	}
         	else {
         		throw new Exception("Could not find student id: " + userId);
@@ -153,36 +155,31 @@ public class UserDbUtil {
 	}
 
 	public void updateUser(User theUser) throws Exception {
-		
-		Connection myConn = null;
-        PreparedStatement myStmt = null;
-        
-        try {
-        // get db connection
-        
-        myConn = dataSource.getConnection();
-        
-        // create SQL update statement
-        
-        String sql = "update user " 
-        		+ "set first_name=?, last_name=?, email=? "
-        		+ "where id=?";
-        
-        // prepare statement
-        myStmt = myConn.prepareStatement(sql);
-        
-        // set params
-        myStmt.setString(1, theUser.getFirstName());
-        myStmt.setString(2, theUser.getLastName());
-        myStmt.setString(3, theUser.getEmail());
-        myStmt.setInt(4, theUser.getId());
-        
-        // execute SQL statement
-        myStmt.execute();	
-	}
-		finally {
-	    	// clean up JDBC objects
-	    	close(myConn, myStmt, null);
+	    Connection myConn = null;
+	    PreparedStatement myStmt = null;
+
+	    try {
+	        // get db connection
+	        myConn = dataSource.getConnection();
+
+	        // create SQL update statement
+	        String sql = "UPDATE user SET first_name=?, last_name=?, email=?, password=? WHERE id=?";
+
+	        // prepare statement
+	        myStmt = myConn.prepareStatement(sql);
+
+	        // set params
+	        myStmt.setString(1, theUser.getFirstName());
+	        myStmt.setString(2, theUser.getLastName());
+	        myStmt.setString(3, theUser.getEmail());
+	        myStmt.setString(4, theUser.getPassword()); // Include password update
+	        myStmt.setInt(5, theUser.getId());
+
+	        // execute SQL statement
+	        myStmt.execute();
+	    } finally {
+	        // clean up JDBC objects
+	        close(myConn, myStmt, null);
 	    }
 	}
 

@@ -21,7 +21,7 @@ public class UserControllerServlet extends HttpServlet {
 
 	private UserDbUtil userDbUtil;
 	
-	@Resource(name="jdbc/web_student_tracker")
+	@Resource(name="jdbc/web_gameshop")
 	private DataSource dataSource;
 	
 	
@@ -101,10 +101,11 @@ public class UserControllerServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("studentId"));
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");		
+		String email = request.getParameter("email");	
+		String password = request.getParameter("password");
 		
 		// create a new user object
-		User theUser = new User(id, firstName, lastName, email);
+		User theUser = new User(id, firstName, lastName, email, password);
 		
 		
 		// perform update on database
