@@ -35,7 +35,6 @@
           <br/>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <br/>
         <label
           >New to Game Tales? <a href="register.jsp"> Register</a></label
         >

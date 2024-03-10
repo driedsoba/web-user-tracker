@@ -14,12 +14,20 @@
         <br/>
         <form method="get" action="register">
           <div class="form-group">
-            <label>Name</label>
+            <label>First Name</label>
             <input
               class="form-control"
               type="text"
               placeholder="Enter name"
-              name="name"
+              name="firstName"
+            />
+            <br/>
+            <label>Last Name</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter name"
+              name="lastName"
             />
             <br/>
             <label>Email address</label>
