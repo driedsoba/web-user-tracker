@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.mindrot.jbcrypt.BCrypt;
 import javax.sql.DataSource;
+
+// Assuming User is a simple POJO with a constructor and getters/setters
+// import com.eshop.web.jdbc.User; // Uncomment this line if User is in the same package
 
 public class UserDbUtil {
 
@@ -18,120 +21,197 @@ public class UserDbUtil {
     }
 
     public List<User> getUsers() throws Exception {
+
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM user ORDER BY last_name";
 
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql);
-             ResultSet myRs = myStmt.executeQuery()) {
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
 
+        try {
+            // Get a connection from the pool
+            myConn = dataSource.getConnection();
+
+            // Create SQL statement
+            String sql = "SELECT * FROM user ORDER BY last_name";
+
+            myStmt = myConn.createStatement();
+
+            // Execute the query
+            myRs = myStmt.executeQuery(sql);
+
+            // Process the result set
             while (myRs.next()) {
+                // Retrieve data from result set row
                 int id = myRs.getInt("id");
                 String firstName = myRs.getString("first_name");
                 String lastName = myRs.getString("last_name");
                 String email = myRs.getString("email");
                 String password = myRs.getString("password");
 
+                // Create new user object and add it to the list
                 User tempUser = new User(id, firstName, lastName, email, password);
                 users.add(tempUser);
             }
+
+            return users;
+        } finally {
+            // Ensure resources are closed in reverse order of their creation
+            close(myConn, myStmt, myRs);
         }
-        return users;
     }
 
     public void addUser(User theUser) throws SQLException {
-        String sql = "INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
-        
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql)) {
-            
-            String hashedPassword = BCrypt.hashpw(theUser.getPassword(), BCrypt.gensalt());
-            
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+
+        try {
+            // Get database connection
+            myConn = dataSource.getConnection();
+
+            // SQL statement for insert
+            String sql = "INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+
+            myStmt = myConn.prepareStatement(sql);
+
+            // Set parameter values for the user
             myStmt.setString(1, theUser.getFirstName());
             myStmt.setString(2, theUser.getLastName());
             myStmt.setString(3, theUser.getEmail());
-            myStmt.setString(4, hashedPassword);
+            myStmt.setString(4, theUser.getPassword());  
 
-            myStmt.executeUpdate();
+            // Execute SQL insert
+            myStmt.execute();
+        } finally {
+            // Clean up JDBC objects
+            close(myConn, myStmt, null);
         }
     }
 
-    public User getUser(String theUserId) throws Exception {
-        User theUser = null;
-        String sql = "SELECT * FROM user WHERE id = ?";
+    private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
+        try {
+            if (myRs != null) {
+                myRs.close();
+            }
+            if (myStmt != null) {
+                myStmt.close();
+            }
+            if (myConn != null) {
+                myConn.close();
+            }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+
+	public User getUser(String theUserId) throws Exception {
+		User theUser = null;
+		
+		Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        int userId;
         
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql)) {
-            
-            myStmt.setInt(1, Integer.parseInt(theUserId));
-            try (ResultSet myRs = myStmt.executeQuery()) {
-                if (myRs.next()) {
-                    int id = myRs.getInt("id");
-                    String firstName = myRs.getString("first_name");
-                    String lastName = myRs.getString("last_name");
-                    String email = myRs.getString("email");
-                    String password = myRs.getString("password");
-
-                    theUser = new User(id, firstName, lastName, email, password);
-                } else {
-                    throw new Exception("Could not find user id: " + theUserId);
-                }
-            }
+        try {
+        	
+        	// convert user id to int
+        	userId = Integer.parseInt(theUserId);
+        	
+        	// get connection to database
+        	myConn = dataSource.getConnection();
+        	
+        	// create sql to get selected student
+        	String sql = "select * from user where id=?";
+        	
+        	// create prepared statement
+        	myStmt = myConn.prepareStatement(sql);
+        	
+        	//set params
+        	myStmt.setInt(1, userId);
+        	
+        	// execute statement
+        	myRs = myStmt.executeQuery();
+        	
+        	// retrieve data from result set row
+        	if (myRs.next()) {
+        		String firstName = myRs.getString("first_name");
+                String lastName = myRs.getString("last_name");
+                String email = myRs.getString("email");
+                String password = myRs.getString("password");
+        		
+                // use the userId during construction
+                theUser = new User (userId, firstName, lastName, email, password);
+        	}
+        	else {
+        		throw new Exception("Could not find student id: " + userId);
+        	}
+        	return theUser;
         }
-        return theUser;
-    }
-
-    public void updateUser(User theUser) throws Exception {
-        String sql = "UPDATE user SET first_name=?, last_name=?, email=?, password=? WHERE id=?";
-
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql)) {
-            
-            String hashedPassword = BCrypt.hashpw(theUser.getPassword(), BCrypt.gensalt());
-            
-            myStmt.setString(1, theUser.getFirstName());
-            myStmt.setString(2, theUser.getLastName());
-            myStmt.setString(3, theUser.getEmail());
-            myStmt.setString(4, hashedPassword);
-            myStmt.setInt(5, theUser.getId());
-
-            myStmt.executeUpdate();
+		
+        finally {
+        	// clean up JDBC objects
+        	close(myConn, myStmt, myRs);
         }
-    }
+	}
 
-    public void deleteUser(String theUserId) throws Exception {
-        String sql = "DELETE FROM user WHERE id=?";
+	public void updateUser(User theUser) throws Exception {
+	    Connection myConn = null;
+	    PreparedStatement myStmt = null;
 
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql)) {
-            
-            myStmt.setInt(1, Integer.parseInt(theUserId));
-            myStmt.executeUpdate();
+	    try {
+	        // get db connection
+	        myConn = dataSource.getConnection();
+
+	        // create SQL update statement
+	        String sql = "UPDATE user SET first_name=?, last_name=?, email=?, password=? WHERE id=?";
+
+	        // prepare statement
+	        myStmt = myConn.prepareStatement(sql);
+
+	        // set params
+	        myStmt.setString(1, theUser.getFirstName());
+	        myStmt.setString(2, theUser.getLastName());
+	        myStmt.setString(3, theUser.getEmail());
+	        myStmt.setString(4, theUser.getPassword()); // Include password update
+	        myStmt.setInt(5, theUser.getId());
+
+	        // execute SQL statement
+	        myStmt.execute();
+	    } finally {
+	        // clean up JDBC objects
+	        close(myConn, myStmt, null);
+	    }
+	}
+
+	public void deleteUser(String theUserId) throws Exception{
+		
+		Connection myConn = null;
+        PreparedStatement myStmt = null;
+        
+        try {
+ 
+        	// convert user id to int
+        	int userId = Integer.parseInt(theUserId);
+        	
+        	// get connection to database
+        	myConn = dataSource.getConnection();
+        	
+        	// create sql to get selected student
+        	String sql = "delete from user where id=?";
+        	
+        	// create prepared statement
+        	myStmt = myConn.prepareStatement(sql);
+        	
+        	//set params
+        	myStmt.setInt(1, userId);
+        	
+        	// execute statement
+        	myStmt.execute();
         }
-    }
-
-    public User authenticateUser(String email, String password) throws Exception {
-        User theUser = null;
-        String sql = "SELECT * FROM user WHERE email = ?";
-
-        try (Connection myConn = dataSource.getConnection();
-             PreparedStatement myStmt = myConn.prepareStatement(sql)) {
-            
-            myStmt.setString(1, email);
-            try (ResultSet myRs = myStmt.executeQuery()) {
-                if (myRs.next()) {
-                    String dbPassword = myRs.getString("password");
-                    if (BCrypt.checkpw(password, dbPassword)) {
-                        int id = myRs.getInt("id");
-                        String firstName = myRs.getString("first_name");
-                        String lastName = myRs.getString("last_name");
-                        theUser = new User(id, firstName, lastName, email, dbPassword);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new Exception("Authentication failed", e);
+        finally {
+        	// clean up JDBC code
+        	close(myConn, myStmt, null);
         }
-        return theUser; // return null or throw an exception if authentication fails
-    }
+		
+	}
 }

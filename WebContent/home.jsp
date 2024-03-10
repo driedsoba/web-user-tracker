@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- Check session to see if user is logged in otherwise redirect to login page -->    
-<%
-if (session.getAttribute("LOGGED_IN_USER") == null) {
-    response.sendRedirect("login.jsp"); // Redirect to login page
-    return; // Stop execution of further page rendering
-}
-%>    
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
