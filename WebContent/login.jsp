@@ -12,7 +12,7 @@
 <body>
         <h2>Login</h2>
         <br/>
-        <form method="get" action="login">
+        <form method="POST" action="LoginServlet">
           <div class="form-group">
             <label>Email address</label>
             <input

@@ -214,4 +214,47 @@ public class UserDbUtil {
         }
 		
 	}
+	public User authenticateUser(String email, String password) throws Exception {
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            // Get a connection from the pool
+            myConn = dataSource.getConnection();
+
+            // Create SQL statement to query user by email
+            String sql = "SELECT * FROM user WHERE email = ?";
+
+            myStmt = myConn.prepareStatement(sql);
+            myStmt.setString(1, email);
+
+            // Execute the query
+            myRs = myStmt.executeQuery();
+
+            // Check if user exists
+            if (myRs.next()) {
+                // Retrieve password from database
+                String dbPassword = myRs.getString("password");
+                if (dbPassword.equals(password)) {
+                    // Password matches, return user
+                    int id = myRs.getInt("id");
+                    String firstName = myRs.getString("first_name");
+                    String lastName = myRs.getString("last_name");
+                    // Email already retrieved
+                    // Create and return user object
+                    return new User(id, firstName, lastName, email, password);
+                }
+            }
+            // User not found or password does not match, return null
+            return null;
+        } finally {
+            // Close all resources
+            close(myConn, myStmt, myRs);
+        }
+    }
+
+	
+	
+	
 }
