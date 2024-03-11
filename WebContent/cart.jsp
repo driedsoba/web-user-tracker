@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Your Shopping Cart</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ensure this path is correct -->
 </head>
 <body>
     <h2>Your Shopping Cart</h2>
@@ -40,7 +41,7 @@
                                 <form action="CartControllerServlet" method="post">
                                     <input type="hidden" name="productId" value="<%= item.getProduct().getId() %>" />
                                     <input type="hidden" name="command" value="REMOVE" />
-                                    <input type="submit" value="Remove from Cart" />
+                                    <input type="submit" value="Remove from Cart" class="remove-btn" /> <!-- Added class for styling -->
                                 </form>
                             </td>
                         </tr>
@@ -56,6 +57,6 @@
     <%
         }
     %>
-    <a href="ProductControllerServlet">Continue Shopping</a>
+    <a href="ProductControllerServlet" class="continue-shopping-link">Continue Shopping</a> <!-- Added class for styling -->
 </body>
 </html>

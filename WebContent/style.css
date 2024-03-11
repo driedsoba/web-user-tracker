@@ -550,3 +550,36 @@ span.price {
 		display: none;
 	}
 }
+
+
+/*------- CART -------*/
+.remove-btn {
+	overflow: hidden;
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.continue-shopping-link {
+    display: block;
+    margin-top: 20px;
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 200px;
+    margin: 20px auto;
+    font-size: 18px;
+}
+
+/* Add some hover effects */
+.remove-btn:hover, .continue-shopping-link:hover {
+    opacity: 0.9;
+}
+
