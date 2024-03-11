@@ -53,6 +53,11 @@
                 </tr>
             </c:forEach>
         </table>
+        <br/>
+        <input type="button" value="Log out"
+               onclick="window.location.href='login.jsp'; return false;"
+               class="add-user-button" />
+        
     </div>
 </body>
 </html>
