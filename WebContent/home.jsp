@@ -118,7 +118,7 @@
           </div>
           
          <div class="col-3">
-          <h3>HELLDIVERS</h3>
+          <h3>HELLDIVERS II</h3>
             
             <div class="rating">
               <i class="fa fa-star"></i>

@@ -10,9 +10,9 @@
 <title>Login</title>
 </head>
 <body>
-        <h2>Login as User</h2>
+        <h2>Login as Admin</h2>
         <br/>
-        <form method="POST" action="LoginServlet">
+        <form method="POST" action="AdminServlet">
           <div class="form-group">
             <label>Email address</label>
             <input
@@ -39,11 +39,9 @@
 		  <% } %>
         </form>
         <label
-          >New to Game Tales? <a href="register.jsp"> Register</a></label
+          >Log in as<a href="login.jsp"> User</a></label
         >
-        <label
-          >Or login as <a href="admin.jsp"> Admin</a></label
-        >
+        
 </body>
 
 <jsp:include page="footer.jsp"/>

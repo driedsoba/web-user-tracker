@@ -28,6 +28,7 @@
               <li>Facebook</li>
               <li>Twitter</li>
               <li>Instagram</li>
+              <li>Youtube</li>
             </ul>
           </div>
           <div class="footer-col-2">
