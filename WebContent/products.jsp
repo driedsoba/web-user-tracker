@@ -12,7 +12,7 @@
 <body>
 
 
-    <div class ="h1"><br/><br/><br/><br/>All Products</div>
+    <div class ="h1"><br/><br/><br/><br/><br/><br/><br/><br/>All Products</div>
     <div class="small-container">
 		<div class ="row">
 		    <div class="col-1">
@@ -25,8 +25,9 @@
 		                    <p>$${product.price}</p>
 		                </div>
 		                    <!-- Add to Cart Button -->
-		                    <form action="AddToCartServlet" method="post">
+		                    <form action="CartControllerServlet" method="POST">
 		                        <input type="hidden" name="productId" value="${product.id}">
+		                        <input type="hidden" name="command" value="ADD" />
 		                        <button type="submit" class="btn">Add to Cart</button>
 		                    </form>
 		                </div>
