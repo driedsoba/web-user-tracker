@@ -86,6 +86,11 @@ p{
 	min-width: 250px;
 	margin-bottom: 30px;
 }
+.col-pdt{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 .col-3 img{
 	width:100%;
 }
@@ -108,7 +113,6 @@ p{
 .title{
 	text-align: center;
 	margin: 0 auto 80px;
-	
 	line-height: 60px;
 	font-size: 50px;
 	color: #555;
@@ -139,6 +143,15 @@ h4{
 }
 .col-4:hover{
 	transform:translateY(-5px);
+}
+.h1{
+	text-align: center;
+	margin: 0 auto 80px;
+	line-height: 60px;
+	font-size: 50px;
+	color: #555;
+	font-size: 45px;
+	font-weight: bold;
 }
 /*-------offer-------*/
 .offer{
@@ -341,8 +354,15 @@ select:focus{
 	font-size: 20px;
 	margin-right: 10px;
 	border: 1px solid #ff523b;
-	justify-content: space-between;
 	display: flex;
+}
+.col-1{
+	flex-basis: 80%;
+	min-width: 500px;
+}
+.col-1 img{
+	max-width: 100%;
+	padding: 50px 0; 
 }
 input:focus{
 	outline:none;
@@ -529,62 +549,4 @@ span.price {
 	.cart-info p{
 		display: none;
 	}
-}
-
-
-/*-------enquiry page-------*/
-/*about*/
-.contact-form{
- position:relative;
- padding-top:100px;
-}
-.contact-form div{
- padding:5px 0;
-}
-.contact-form span{
- display:block;
- font-size:0.8125em;
- color:#757575;
- padding-bottom:5px;
- font-family :verdana, arial, helvetica, helve, sans-serif;
-}
-.contact-form input[type="text"],.contact-form textarea{
-      padding:8px;
-   display:block;
-   width:98%;
-   background:#fcfcfc;
-   border: none;
-   outline:none;
-   color:#464646;
-   font-size:0.8125em;
-   font-family:Arial, Helvetica, sans-serif;
-   box-shadow: inset 0px 0px 3px #999;
-   -webkit-box-shadow: inset 0px 0px 3px #999;
-   -moz-box-shadow: inset 0px 0px 3px #999;
-   -o-box-shadow: inset 0px 0px 3px #999;
-   -webkit-appearance:none;
-}
-.contact-form textarea{
-  resize:none;
-  height:120px;  
-}
-.contact-form input[type="submit"]{
- padding:7px 25px;
- cursor:pointer;
- background:#FFF url(../images/large-button-overlay.png);
-    font-family:Arial, Helvetica, sans-serif;
-    position:absolute;
-    right:0;
-    border: 1px solid #ccc;
- color: #555 !important;
- font-size:1em;
- text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-}
-.contact-form input[type="submit"]:hover{
- background-color: #EEE;
- border-color: #B8B5B5;
- color: #444 !important;
-}
-.contact-form input[type="submit"]:active{
- background-color:#FFF;  
 }

@@ -11,17 +11,18 @@
 </head>
 <body>
 
-<div class="small-container">
+
     <h2>All Products</h2>
-    <div class="row">
-	    <div class="col-3">
-		    <c:forEach var="product" items="${PRODUCT_LIST}">
+    <div class="small-container">
+		<div class ="row">
+		    <div class="col-1">
+		    	<c:forEach var="product" items="${PRODUCT_LIST}">
 		            <div class="single-product input">
 		                <img src="${product.imageUrl}" alt="${product.name}">
 		                <div class="product-details">
-		                    <h4 class="product-name">${product.name}</h4>
-		                    <p class="product-description">${product.description}</p>
-		                    <p class="product-price">$${product.price}</p>
+		                    <h4>${product.name}</h4>
+		                    <p>${product.description}</p>
+		                    <p>$${product.price}</p>
 		                </div>
 		                    <!-- Add to Cart Button -->
 		                    <form action="AddToCartServlet" method="post">
@@ -29,14 +30,15 @@
 		                        <button type="submit" class="btn">Add to Cart</button>
 		                    </form>
 		                </div>
-	        </c:forEach>
-    	</div>
-        
-        <c:if test="${empty PRODUCT_LIST}">
-            <p>No products found.</p>
-        </c:if>
-    </div>
-</div>
+	       	 	</c:forEach>
+	    	</div>
+		</div>
+
+	        <c:if test="${empty PRODUCT_LIST}">
+	            <p>No products found.</p>
+	        </c:if>
+
+	</div>
 
 </body>
 <jsp:include page="footer.jsp"/>

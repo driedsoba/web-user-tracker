@@ -29,7 +29,7 @@
       <div class="navbar">
         <div class="logo">
           <img src="images/logo.png" width="200px" />
-          <a class="title"> GAME TALES </a>
+          <a class="h1"> GAME TALES </a>
         </div>
         <nav>
           <ul id="MenuItems">
@@ -40,7 +40,7 @@
         </nav>
         <a href="cart.jsp"
           ><img src="images/shoppingcart.png" width="30px" height="30px"
-        /></a>
+        /><br/><br/></a>
       </div>
 <hr/>
 </body>
