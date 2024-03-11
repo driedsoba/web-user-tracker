@@ -1,6 +1,8 @@
 <%@ page import="com.eshop.web.jdbc.Cart, com.eshop.web.jdbc.CartItem" %>
+
 <%@ page session="true" %>
 <%
+	
     Cart cart = (Cart) session.getAttribute("CART");
     if (cart == null) {
         cart = new Cart();

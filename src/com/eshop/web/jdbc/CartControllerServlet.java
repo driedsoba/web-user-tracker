@@ -16,7 +16,9 @@ import javax.sql.DataSource;
 @WebServlet("/CartControllerServlet")
 public class CartControllerServlet extends HttpServlet {
 
-    private ProductDbUtil productDbUtil;
+	private static final long serialVersionUID = 1L;
+
+	private ProductDbUtil productDbUtil;
 
     @Resource(name="jdbc/web_gameshop")
     private DataSource dataSource;

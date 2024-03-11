@@ -38,7 +38,7 @@ public class AdminServlet extends HttpServlet {
             if (admin != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", admin);
-                response.sendRedirect("UserControllerServlet.java");
+                response.sendRedirect("UserControllerServlet");
             } else {
                 request.setAttribute("errorMessage", "Invalid email or password");
                 request.getRequestDispatcher("admin.jsp").forward(request, response);

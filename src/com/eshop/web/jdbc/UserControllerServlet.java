@@ -135,15 +135,15 @@ public class UserControllerServlet extends HttpServlet {
 	}
 
 	private void addUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// read student info from form data
+		// read user info from form data
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");		
 		
-		// create a new student object
+		// create a new user object
 		User theUser = new User(firstName, lastName, email);
 		
-		// add the student to the database
+		// add the user to the database
 		userDbUtil.addUser(theUser);
 				
 		// send back to main page (the student list)
@@ -153,11 +153,11 @@ public class UserControllerServlet extends HttpServlet {
 
 	private void listUsers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// get students from db util
+		// get users from db util
 		
 		List<User> users = userDbUtil.getUsers();
 		
-		// add students to request
+		// add users to request
 		
 		request.setAttribute("USER_LIST", users);
 		

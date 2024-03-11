@@ -33,7 +33,7 @@ public class AdminDbUtil {
             myConn = dataSource.getConnection();
 
             // Create SQL statement
-            String sql = "SELECT * FROM user ORDER BY last_name";
+            String sql = "SELECT * FROM admin ORDER BY last_name";
 
             myStmt = myConn.createStatement();
 
