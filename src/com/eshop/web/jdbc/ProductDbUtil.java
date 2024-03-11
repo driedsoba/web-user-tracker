@@ -33,4 +33,29 @@ public class ProductDbUtil {
         }
         return products;
     }
+    
+    public Product getProduct(int productId) throws SQLException {
+        Product product = null;
+        
+        try (Connection myConn = dataSource.getConnection();
+             PreparedStatement myStmt = myConn.prepareStatement("SELECT * FROM products WHERE id = ?")) {
+
+            myStmt.setInt(1, productId);
+            
+            try (ResultSet myRs = myStmt.executeQuery()) {
+                if (myRs.next()) {
+                    product = new Product(
+                        myRs.getInt("id"),
+                        myRs.getString("name"),
+                        myRs.getString("description"),
+                        myRs.getDouble("price"),
+                        myRs.getString("image_url"),
+                        myRs.getString("category")
+                    );
+                }
+            }
+        }
+        return product;
+    }
+
 }

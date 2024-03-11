@@ -16,21 +16,23 @@
     <div class="small-container">
 		<div class ="row">
 		    <div class="col-1">
-		    	<c:forEach var="product" items="${PRODUCT_LIST}">
-		            <div class="single-product input">
-		                <img src="${product.imageUrl}" alt="${product.name}">
-		                <div class="product-details">
-		                    <h4>${product.name}</h4>
-		                    <p>${product.description}</p>
-		                    <p>$${product.price}</p>
-		                </div>
-		                    <!-- Add to Cart Button -->
-		                    <form action="AddToCartServlet" method="post">
-		                        <input type="hidden" name="productId" value="${product.id}">
-		                        <button type="submit" class="btn">Add to Cart</button>
-		                    </form>
-		                </div>
-	       	 	</c:forEach>
+				<c:forEach var="product" items="${PRODUCT_LIST}">
+				    <div>
+				        <!-- Display product details here. -->
+				        <img src="${product.imageUrl}" alt="${product.name}"/>
+				        <h2>${product.name}</h2>
+				        <p>${product.description}</p>
+				        <p>Price: ${product.price}</p>
+				
+				        <!-- Add to Cart form -->
+				        <form action="CartControllerServlet" method="post">
+				            <input type="hidden" name="productId" value="${product.id}" />
+				            <input type="hidden" name="command" value="ADD" />
+				            <input type="submit" value="Add to Cart" />
+				        </form>
+				    </div>
+				</c:forEach>
+
 	    	</div>
 		</div>
 
