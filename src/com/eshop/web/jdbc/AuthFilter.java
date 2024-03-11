@@ -32,6 +32,7 @@ public class AuthFilter implements Filter {
             path.equals("/add-user-form.jsp") ||
             path.equals("/update-user-form.jsp") ||
             path.equals("/list-users.jsp") ||
+            path.equals("/admin.jsp") ||
             path.equals("/RegisterServlet")) {
             // Public path, do not apply the filter, just continue the chain
             chain.doFilter(request, response);
