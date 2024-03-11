@@ -15,7 +15,7 @@
            <img src="images/homepage.gif" style="position: relative;"><span style="position: absolute; centre: 5px; south: 10px;">
            <br/><br/><br/><br/><br/><a href="ProductControllerServlet" class="btn">SHOP NOW —></a></span>
          <div class="h1">
-          <br/>
+          <br/><br/><br/><br/><br/><br/><br/><br/>
 			Hot Games         
           </div>
        </div>
