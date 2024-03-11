@@ -35,7 +35,6 @@
           <ul id="MenuItems">
             <li><a href="home.jsp">Home</a></li>
             <li><a href="products.jsp">Products</a></li>
-            <li><a href="enquiry.jsp">Contact Us</a></li>
             <li><a href="login.jsp">Login</a></li>
           </ul>
         </nav>

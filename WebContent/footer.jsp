@@ -11,7 +11,6 @@
 <hr/>
 
   <div class="footer">
-      <div class="container">
         <div class="row">
           <div class="footer-col-1">
             <h3>Like what you see?</h3>
@@ -46,10 +45,8 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/copyright.jpg" width="20px" height="20px" />
           <p class="Copyright">&nbsp;&nbsp;Copyright 2024</p>
     </div>
+</div>
 
-        
-      </div>
-    </div>
 
 <br/>
 </body>

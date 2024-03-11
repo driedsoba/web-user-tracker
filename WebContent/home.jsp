@@ -50,7 +50,7 @@
               <i class="fa fa-star-half-o"></i>
             </div>
             <br/>
-            <img src="images/game2.jpeg" />
+            <img src="images/game2.jpg" />
             	<p>
 	              "Impeccable attention to detail and extremely thrilling" <br/>
 	              "2024 Stream Game of the Year Winner"
