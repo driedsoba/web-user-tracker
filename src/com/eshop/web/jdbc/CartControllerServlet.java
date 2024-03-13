@@ -59,7 +59,7 @@ public class CartControllerServlet extends HttpServlet {
 
         int productId = Integer.parseInt(request.getParameter("productId"));
         Product product = productDbUtil.getProduct(productId);
-        cart.addItem(product, 1); // For simplicity, we're always adding one item. You can adjust this as needed.
+        cart.addItem(product, 1);
 
         session.setAttribute("CART", cart);
     }

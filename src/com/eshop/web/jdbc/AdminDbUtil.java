@@ -253,8 +253,4 @@ public class AdminDbUtil {
             close(myConn, myStmt, myRs);
         }
     }
-
-	
-	
-	
 }

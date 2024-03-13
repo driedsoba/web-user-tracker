@@ -252,9 +252,5 @@ public class UserDbUtil {
             // Close all resources
             close(myConn, myStmt, myRs);
         }
-    }
-
-	
-	
-	
+    }	
 }

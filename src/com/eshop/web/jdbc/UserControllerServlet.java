@@ -164,8 +164,6 @@ public class UserControllerServlet extends HttpServlet {
 		// sent to JSP page (view)
 		RequestDispatcher dispatcher = 
 				request.getRequestDispatcher("/list-users.jsp");
-		dispatcher.forward(request, response);
-		
+		dispatcher.forward(request, response);	
 	}
-
 }

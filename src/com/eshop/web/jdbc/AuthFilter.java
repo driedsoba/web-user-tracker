@@ -22,9 +22,9 @@ public class AuthFilter implements Filter {
         String path = request.getRequestURI().substring(request.getContextPath().length());
 
         // Paths that should be publicly accessible
-        if (path.startsWith("/css") || // Assuming your CSS directory is named 'css'
-            path.startsWith("/images") || // Assuming your images directory is named 'images'
-            path.startsWith("/js") || // Assuming your JavaScript directory is named 'js'
+        if (path.startsWith("/css") || 
+            path.startsWith("/images") || 
+            path.startsWith("/js") || 
             path.equals("/style.css") ||
             path.equals("/login.jsp") ||
             path.equals("/register.jsp") ||
