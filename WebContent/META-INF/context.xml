@@ -3,7 +3,7 @@
   <Resource name="jdbc/web_gameshop"
   			auth="Container" type="javax.sql.DataSource"
                maxActive="20" maxIdle="5" maxWait="10000"
-               username="junle" password="xxxx" 
+               username="YOUR_DB_USERNAME" password="YOUR_DB_PASSWORD" 
                driverClassName="com.mysql.cj.jdbc.Driver"
                url="jdbc:mysql://localhost:3306/web_gameshop?useSSL=false&amp;serverTimezone=UTC"/>
 
